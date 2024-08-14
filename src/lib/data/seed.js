@@ -17,7 +17,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 fs.writeFileSync(
-  path.join(process.cwd(), 'src', 'temp', 'store-data.json'),
+  path.join(process.cwd(), 'tmp', 'store-data.json'),
   JSON.stringify(students, null, 2)
 )
 
