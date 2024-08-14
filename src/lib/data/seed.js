@@ -4,7 +4,7 @@ const path = require('path')
 
 const students = []
 
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 5; i++) {
   students.push({
     id: faker.string.uuid(),
     profile: faker.image.avatar(),
@@ -17,7 +17,7 @@ for (let i = 0; i < 2; i++) {
 }
 
 fs.writeFileSync(
-  path.join(__dirname, 'students.json'),
+  path.join(process.cwd(), 'src', 'temp', 'store-data.json'),
   JSON.stringify(students, null, 2)
 )
 

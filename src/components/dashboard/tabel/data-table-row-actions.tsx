@@ -1,24 +1,14 @@
 'use client'
 
-import { deleteStudent } from '@/action/user-action'
+import { ModalDelete } from '@/components/modal/modal-delete'
 import { Button } from '@/components/ui/button'
 import { StudentType } from '@/lib/data/schema'
-import { Pen, Trash2 } from 'lucide-react'
+import { Pen } from 'lucide-react'
 
 export function DataTableRowActions({ student }: { student: StudentType }) {
-  const deleteHandler = async () => {
-    await deleteStudent(student.id)
-  }
   return (
     <div className='flex space-x-2'>
-      <Button
-        variant={'ghost'}
-        className='text-red-500 hover:text-red-600'
-        onClick={deleteHandler}
-      >
-        <Trash2 />
-      </Button>
-
+      <ModalDelete studentId={student.id} />
       <Button
         variant={'ghost'}
         className='text-yellow-500 hover:text-yellow-600'
