@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Home, Menu, User } from 'lucide-react'
+import { GraduationCap, LayoutDashboard, Menu } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -11,12 +11,12 @@ const items = [
   {
     name: 'Dashboard',
     href: '/dashboard',
-    icon: <Home className='h-6 w-6' />,
+    icon: <LayoutDashboard className='h-6 w-6' />,
   },
   {
     name: 'Students',
     href: '/dashboard/students',
-    icon: <User className='h-6 w-6' />,
+    icon: <GraduationCap className='h-6 w-6' />,
   },
 ]
 
@@ -105,7 +105,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
         </header>
 
         {/* main */}
-        <main className='p-4 lg:gap-6 lg:p-6 bg-zinc-100'>{children}</main>
+        <main className='p-4 lg:gap-6 lg:p-6 '>{children}</main>
       </div>
     </div>
   )
