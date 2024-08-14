@@ -18,7 +18,7 @@ export async function getStudent() {
 
     return JSON.parse(data.toString() || '[]')
   } catch (error) {
-    console.error(error)
+    console.log(error)
   }
 }
 
@@ -35,11 +35,17 @@ export async function deleteStudent(id: string) {
       'students.json'
     )
 
+    // Check if the file exists
+    try {
+      await fs.access(filePath)
+    } catch (error) {
+      throw new Error(`File not found: ${filePath}`)
+    }
+
     await fs.writeFile(filePath, JSON.stringify(newData, null, 2), 'utf-8')
 
     return { message: 'Student deleted successfully' }
   } catch (error) {
-    console.error(error)
-    throw new Error('Failed to delete student')
+    return { message: 'Internal Server error' }
   }
 }
