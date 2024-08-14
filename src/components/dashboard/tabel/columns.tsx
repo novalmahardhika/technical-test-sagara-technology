@@ -71,6 +71,9 @@ export const columns: ColumnDef<StudentType>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => <DataTableRowActions row={row} />,
+    cell: ({ row }) => {
+      const student = row.original
+      return <DataTableRowActions student={student} />
+    },
   },
 ]

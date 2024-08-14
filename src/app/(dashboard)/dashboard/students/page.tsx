@@ -1,22 +1,11 @@
-import { promises as fs } from 'fs'
-import path from 'path'
 import { columns } from '@/components/dashboard/tabel/columns'
 import { DataTable } from '@/components/dashboard/tabel/data-table'
 import { formatDate } from '@/lib/format-date'
 import { StudentType } from '@/lib/data/schema'
-
-async function getTasks() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), '/src/lib/data/students.json')
-  )
-
-  const students = JSON.parse(data.toString() || '[]')
-
-  return students
-}
+import { getStudent } from '@/action/user-action'
 
 export default async function StudentsPage() {
-  let data: StudentType[] = await getTasks()
+  const data: StudentType[] = await getStudent()
 
   const formatData = data.map((prev) => ({
     ...prev,

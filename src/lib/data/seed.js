@@ -4,7 +4,7 @@ const path = require('path')
 
 const students = []
 
-for (let i = 0; i < 2000; i++) {
+for (let i = 0; i < 2; i++) {
   students.push({
     id: faker.string.uuid(),
     profile: faker.image.avatar(),
