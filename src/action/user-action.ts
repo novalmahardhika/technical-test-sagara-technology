@@ -35,6 +35,8 @@ export async function createStudent(payload: StudentType) {
 
     return { success: 'Student created successfully' }
   } catch (error) {
+    console.log(error)
+
     return { error: 'Internal Server error' }
   }
 }
@@ -49,6 +51,7 @@ export async function deleteStudent(id: string) {
 
     return { success: 'Student deleted successfully' }
   } catch (error) {
+    console.log(error)
     return { error: 'Internal Server error' }
   }
 }
