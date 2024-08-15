@@ -8,6 +8,8 @@ const filePath =
     ? path.join(process.cwd(), '/tmp', 'store-data.json')
     : path.join('/tmp', 'store-data.json')
 
+export const dynamic = 'force-dynamic'
+
 export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
