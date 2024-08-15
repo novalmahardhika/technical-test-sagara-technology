@@ -6,10 +6,11 @@ import { studentsSchema, StudentType } from '@/lib/data/schema'
 import { revalidatePath } from 'next/cache'
 import crypto from 'crypto'
 
-export const dynamic = 'force-dynamic'
-
 // path store-data
-const filePath = path.join(process.cwd(), 'tmp', 'store-data.json')
+const filePath =
+  process.env.NODE_ENV === 'production'
+    ? path.join(process.cwd(), 'tmp', 'store-data.json')
+    : path.join(process.cwd(), '/tmp', 'store-data.json')
 
 export async function getStudent() {
   try {
@@ -42,21 +43,6 @@ export async function createStudent(payload: StudentType) {
     return { error: 'Internal Server error' }
   }
 }
-
-// export async function deleteStudent(id: string) {
-//   try {
-//     const data: StudentType[] = await getStudent()
-//     const newData = data.filter((student) => student.id !== id)
-
-//     await fs.writeFile(filePath, JSON.stringify(newData, null, 2), 'utf-8')
-//     revalidatePath('/dashboard/students')
-
-//     return { success: 'Student deleted successfully' }
-//   } catch (error) {
-//     console.log(error)
-//     return { error: 'Internal Server error' }
-//   }
-// }
 
 export async function deleteStudent(id: string) {
   try {

@@ -14,36 +14,62 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { Trash2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { toast } from 'sonner'
 
 export function ModalDelete({ studentId }: { studentId: string }) {
-  const [isPending, startTransition] = useTransition()
+  const router = useRouter()
+  // const [isPending, startTransition] = useTransition()
 
-  const deleteHandler = () => {
-    startTransition(async () => {
-      try {
-        const data = await deleteStudent(studentId)
-        if (data.success) {
-          toast.success(data.success)
-          return
-        }
-        if (data.error) {
-          toast.error(data.error)
-          return
-        }
-      } catch (error) {
+  // const deleteHandler = () => {
+  //   startTransition(async () => {
+  //     try {
+  //       const data = await deleteStudent(studentId)
+  //       if (data.success) {
+  //         toast.success(data.success)
+  //         return
+  //       }
+  //       if (data.error) {
+  //         toast.error(data.error)
+  //         return
+  //       }
+  //     } catch (error) {
+  //       toast.error('Something went wrong')
+  //     }
+  //   })
+  // }
+
+  const deleteHandler = async () => {
+    try {
+      const res = await fetch(`/api/students/${studentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!res.ok) {
         toast.error('Something went wrong')
+        return
       }
-    })
+
+      toast.success('Student deleted successfully')
+      router.refresh()
+    } catch (error) {
+      console.log(error)
+
+      toast.error('Internal Server error')
+    }
   }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
           variant={'ghost'}
           className='text-red-500 hover:text-red-600'
-          disabled={isPending}
+          // disabled={isPending}
         >
           <Trash2 />
         </Button>
