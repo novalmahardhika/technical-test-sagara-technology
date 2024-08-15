@@ -6,6 +6,8 @@ import { studentsSchema, StudentType } from '@/lib/data/schema'
 import { revalidatePath } from 'next/cache'
 import crypto from 'crypto'
 
+export const dynamic = 'force-dynamic'
+
 // path store-data
 const filePath = path.join(process.cwd(), 'tmp', 'store-data.json')
 
