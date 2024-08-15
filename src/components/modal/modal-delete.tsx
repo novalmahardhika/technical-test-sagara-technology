@@ -1,5 +1,6 @@
 'use client'
 
+import { deleteStudent } from '@/action/user-action'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,34 +15,30 @@ import {
 import { Button } from '@/components/ui/button'
 import { Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
 
 export function ModalDelete({ studentId }: { studentId: string }) {
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [isePending, startTransition] = useTransition()
 
-  const deleteHandler = async () => {
-    try {
-      setLoading(true)
-      const res = await fetch(`/api/students/${studentId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+  const deleteHandler = () => {
+    startTransition(async () => {
+      try {
+        const data = await deleteStudent(studentId)
 
-      if (!res.ok) {
-        throw new Error('Something went wrong')
+        if (data.success) {
+          toast.success(data.success)
+          return
+        }
+
+        if (data.error) {
+          toast.error(data.error)
+          return
+        }
+      } catch (error) {
+        toast.error('Something went wrong')
       }
-
-      toast.success('Student deleted successfully')
-      router.refresh()
-    } catch (error) {
-      toast.error('Internal Server error')
-    } finally {
-      setLoading(false)
-    }
+    })
   }
 
   return (
@@ -50,7 +47,7 @@ export function ModalDelete({ studentId }: { studentId: string }) {
         <Button
           variant={'ghost'}
           className='text-red-500 hover:text-red-600'
-          disabled={loading}
+          disabled={isePending}
         >
           <Trash2 />
         </Button>

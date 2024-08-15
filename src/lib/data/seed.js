@@ -25,7 +25,7 @@ const arrClass = [
   'Android Developer',
 ]
 
-for (let i = 0; i < 2000; i++) {
+for (let i = 0; i < 2330; i++) {
   students.push({
     id: faker.string.uuid(),
     profile: faker.image.avatar(),

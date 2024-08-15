@@ -7,6 +7,10 @@ import { getStudent } from '@/action/user-action'
 export default async function StudentsPage() {
   const data: StudentType[] = await getStudent()
 
+  if (!data) {
+    return null
+  }
+
   const formatData = data.map((prev) => ({
     ...prev,
     createdAt: formatDate(prev.createdAt),

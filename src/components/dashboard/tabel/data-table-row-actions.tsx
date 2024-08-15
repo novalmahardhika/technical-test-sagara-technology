@@ -4,7 +4,6 @@ import { ModalDelete } from '@/components/modal/modal-delete'
 import UpdateModal from '@/components/modal/update-modal'
 import { Button } from '@/components/ui/button'
 import { StudentType } from '@/lib/data/schema'
-import { Pen } from 'lucide-react'
 
 export function DataTableRowActions({ student }: { student: StudentType }) {
   return (

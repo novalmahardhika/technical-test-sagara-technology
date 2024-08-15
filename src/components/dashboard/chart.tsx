@@ -66,7 +66,7 @@ export function Chart({ student }: { student: StudentType[] }) {
         barGap={20}
         barSize={90}
         margin={{
-          top: 20,
+          top: 50,
         }}
       >
         <CartesianGrid vertical={false} />

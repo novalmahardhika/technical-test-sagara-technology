@@ -4,7 +4,7 @@ import React from 'react'
 import { Chart } from './chart'
 import { StudentType } from '@/lib/data/schema'
 
-export default function CardStatistic({ student }: { student: StudentType[] }) {
+export default function Statistic({ student }: { student: StudentType[] }) {
   const total = student.length
   const certified = student.filter((x) => +x.score > 70).length
   const average = student.reduce((a, c) => a + +c.score, 0) / total

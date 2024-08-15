@@ -143,7 +143,7 @@ export default function CreateModal() {
                   <FormControl>
                     <Select onValueChange={(value) => field.onChange(value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder='Select a fruit' />
+                        <SelectValue placeholder='Select a Instance' />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>

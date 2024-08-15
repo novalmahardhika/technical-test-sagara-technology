@@ -7,6 +7,16 @@ import { filePath } from '@/lib/file-path'
 import { generateUUID } from '@/lib/generate-uuid'
 import { z } from 'zod'
 
+const arrClass = [
+  'UI/UX',
+  'Backend',
+  'Frontend',
+  'Quality Assurance',
+  'IOS Developer',
+  'Fullstack Developer',
+  'Android Developer',
+]
+
 export async function getStudent() {
   try {
     const data = await fs.readFile(filePath)
@@ -36,6 +46,8 @@ export async function createStudent(values: z.infer<typeof studentFormSchema>) {
       ...payload,
       createdAt: new Date().toISOString(),
       profile: 'https://github.com/shadcn.png',
+      course: arrClass[Math.floor(Math.random() * arrClass.length)],
+      score: Math.floor(Math.random() * (100 - 60 + 1)) + 60,
     }
 
     data = [...data, modifiedPayload]
@@ -68,15 +80,17 @@ export async function updateStudent(
 
     const index = data.findIndex((x) => x.id === userId)
 
-    if (!index) {
+    if (!index && index !== 0) {
       return { error: 'Student Not found' }
     }
 
     const modifiedPayload = {
-      id: generateUUID,
+      id: data[index].id,
       ...payload,
       createdAt: new Date().toISOString(),
       profile: 'https://github.com/shadcn.png',
+      course: arrClass[Math.floor(Math.random() * arrClass.length)],
+      score: Math.floor(Math.random() * (100 - 60 + 1)) + 60,
     }
 
     data[index] = modifiedPayload

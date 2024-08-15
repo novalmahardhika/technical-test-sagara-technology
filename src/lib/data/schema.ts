@@ -10,7 +10,7 @@ export const studentsSchema = z.object({
   instance: z.string(),
   createdAt: z.string(),
   course: z.string(),
-  score: z.string(),
+  score: z.number(),
   reTypePassword: z.string().optional(),
 })
 

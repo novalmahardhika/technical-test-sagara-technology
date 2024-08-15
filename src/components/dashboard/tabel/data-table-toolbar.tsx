@@ -5,9 +5,8 @@ import { Table } from '@tanstack/react-table'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { DataTableViewOptions } from './data-table-view-options'
-import { Plus } from 'lucide-react'
+
 import CreateModal from '@/components/modal/create-modal'
-// import { C } from '@/components/modal/create-modal'
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
