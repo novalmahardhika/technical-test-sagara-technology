@@ -96,7 +96,9 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
         </header>
 
         {/* main */}
-        <main className='p-4 lg:gap-6 lg:p-6 '>{children}</main>
+        <main className='p-4 lg:gap-6 lg:p-11 bg-zinc-100 h-full'>
+          {children}
+        </main>
       </div>
     </div>
   )

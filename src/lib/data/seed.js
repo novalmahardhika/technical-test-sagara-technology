@@ -15,6 +15,16 @@ const arrInstance = [
   'Universitas Negeri Jakarta',
 ]
 
+const arrClass = [
+  'UI/UX',
+  'Backend',
+  'Frontend',
+  'Quality Assurance',
+  'IOS Developer',
+  'Fullstack Developer',
+  'Android Developer',
+]
+
 for (let i = 0; i < 2000; i++) {
   students.push({
     id: faker.string.uuid(),
@@ -24,6 +34,8 @@ for (let i = 0; i < 2000; i++) {
     email: faker.internet.email(),
     phoneNumber: fakerID_ID.phone.number(),
     instance: arrInstance[Math.floor(Math.random() * arrInstance.length)],
+    course: arrClass[Math.floor(Math.random() * arrClass.length)],
+    score: Math.floor(Math.random() * (100 - 60 + 1)) + 60,
     createdAt: new Date().toISOString(),
   })
 }

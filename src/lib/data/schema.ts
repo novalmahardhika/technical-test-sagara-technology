@@ -9,6 +9,8 @@ export const studentsSchema = z.object({
   phoneNumber: z.string(),
   instance: z.string(),
   createdAt: z.string(),
+  course: z.string(),
+  score: z.string(),
   reTypePassword: z.string().optional(),
 })
 
