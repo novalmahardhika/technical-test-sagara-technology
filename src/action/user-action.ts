@@ -61,7 +61,7 @@ export async function deleteStudent(id: string) {
     const data: StudentType[] = await getStudent()
     const newData = data.filter((student) => student.id !== id)
 
-    const tempFilePath = path.join('tmp', 'store-data.json')
+    const tempFilePath = path.join('/tmp', 'store-data.json')
 
     // Write the updated data to the /tmp directory
     await fs.writeFile(tempFilePath, JSON.stringify(newData, null, 2), 'utf-8')
