@@ -18,6 +18,8 @@ import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { toast } from 'sonner'
 
+export const dynamic = 'force-dynamic'
+
 export function ModalDelete({ studentId }: { studentId: string }) {
   const router = useRouter()
   // const [isPending, startTransition] = useTransition()
