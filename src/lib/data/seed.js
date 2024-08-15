@@ -10,9 +10,12 @@ const arrInstance = [
   'Univeritas Indonesia',
   'Univeristas Gunadarma',
   'Univeristas Mercu Buana',
+  'Universitas Bina Sarana Informatika',
+  'Universitas Budi Luhur',
+  'Universitas Negeri Jakarta',
 ]
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 2000; i++) {
   students.push({
     id: faker.string.uuid(),
     profile: faker.image.avatar(),

@@ -1,24 +1,15 @@
 'use server'
 
 import { promises as fs } from 'fs'
-import path from 'path'
-import {
-  studentFormSchema,
-  StudentFormSchemaType,
-  studentsSchema,
-  StudentType,
-} from '@/lib/data/schema'
+import { studentFormSchema, StudentType } from '@/lib/data/schema'
 import { revalidatePath } from 'next/cache'
 import { filePath } from '@/lib/file-path'
 import { generateUUID } from '@/lib/generate-uuid'
 import { z } from 'zod'
 
-// path store-data
-
 export async function getStudent() {
   try {
     const data = await fs.readFile(filePath)
-
     return JSON.parse(data.toString() || '[]')
   } catch (error) {
     console.log(error)
