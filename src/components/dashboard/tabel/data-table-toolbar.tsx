@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { DataTableViewOptions } from './data-table-view-options'
 import { Plus } from 'lucide-react'
+import CreateModal from '@/components/modal/create-modal'
+// import { C } from '@/components/modal/create-modal'
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -19,10 +21,7 @@ export function DataTableToolbar<TData>({
   return (
     <div className='flex items-center justify-between space-x-3'>
       <div>
-        <Button className='flex bg-rose-700 hover:bg-rose-800 justify-center items-center space-x-1'>
-          <Plus />
-          <span>Add User</span>
-        </Button>
+        <CreateModal />
       </div>
 
       <div className='flex space-x-3'>

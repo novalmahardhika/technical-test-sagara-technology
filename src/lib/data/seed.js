@@ -4,14 +4,23 @@ const path = require('path')
 
 const students = []
 
+const arrInstance = [
+  'Telkom University',
+  'Bina Nusantara',
+  'Univeritas Indonesia',
+  'Univeristas Gunadarma',
+  'Univeristas Mercu Buana',
+]
+
 for (let i = 0; i < 5; i++) {
   students.push({
     id: faker.string.uuid(),
     profile: faker.image.avatar(),
     name: fakerID_ID.person.fullName(),
+    password: '12345678',
     email: faker.internet.email(),
     phoneNumber: fakerID_ID.phone.number(),
-    instance: `Instance${i + 1}`,
+    instance: arrInstance[Math.floor(Math.random() * arrInstance.length)],
     createdAt: new Date().toISOString(),
   })
 }

@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { GraduationCap, LayoutDashboard, Menu } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { ReactNode } from 'react'

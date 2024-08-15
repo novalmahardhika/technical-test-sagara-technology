@@ -2,12 +2,18 @@
 
 import { promises as fs } from 'fs'
 import path from 'path'
-import { studentsSchema, StudentType } from '@/lib/data/schema'
+import {
+  studentFormSchema,
+  StudentFormSchemaType,
+  studentsSchema,
+  StudentType,
+} from '@/lib/data/schema'
 import { revalidatePath } from 'next/cache'
-import crypto from 'crypto'
+import { filePath } from '@/lib/file-path'
+import { generateUUID } from '@/lib/generate-uuid'
+import { z } from 'zod'
 
 // path store-data
-const filePath = path.join(process.cwd(), 'tmp', 'store-data.json')
 
 export async function getStudent() {
   try {
@@ -19,52 +25,87 @@ export async function getStudent() {
   }
 }
 
-export async function createStudent(payload: StudentType) {
-  const validatePayload = studentsSchema.safeParse(payload)
-
+export async function createStudent(values: z.infer<typeof studentFormSchema>) {
+  const validatePayload = studentFormSchema.safeParse(values)
   if (!validatePayload.success) {
     return { message: 'Invalid data' }
   }
+
+  const payload = validatePayload.data
+
+  if (payload.password !== payload.reTypePassword) {
+    return { error: 'password doesnt match' }
+  }
+
   try {
     let data = await getStudent()
 
-    data = [...data, payload]
+    const modifiedPayload = {
+      id: generateUUID,
+      ...payload,
+      createdAt: new Date().toISOString(),
+      profile: 'https://github.com/shadcn.png',
+    }
 
+    data = [...data, modifiedPayload]
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8')
     revalidatePath('/dashboard/students')
-
     return { success: 'Student created successfully' }
   } catch (error) {
     console.log(error)
-
     return { error: 'Internal Server error' }
   }
 }
 
-// export async function deleteStudent(id: string) {
-//   try {
-//     const data: StudentType[] = await getStudent()
-//     const newData = data.filter((student) => student.id !== id)
+export async function updateStudent(
+  userId: string,
+  values: z.infer<typeof studentFormSchema>
+) {
+  const validatePayload = studentFormSchema.safeParse(values)
 
-//     await fs.writeFile(filePath, JSON.stringify(newData, null, 2), 'utf-8')
-//     revalidatePath('/dashboard/students')
+  if (!validatePayload.success) {
+    return { message: 'Invalid data' }
+  }
+  const payload = validatePayload.data
 
-//     return { success: 'Student deleted successfully' }
-//   } catch (error) {
-//     console.log(error)
-//     return { error: 'Internal Server error' }
-//   }
-// }
+  if (payload.password !== payload.reTypePassword) {
+    return { error: 'password doesnt match' }
+  }
+
+  try {
+    const data: StudentType[] = await getStudent()
+
+    const index = data.findIndex((x) => x.id === userId)
+
+    if (!index) {
+      return { error: 'Student Not found' }
+    }
+
+    const modifiedPayload = {
+      id: generateUUID,
+      ...payload,
+      createdAt: new Date().toISOString(),
+      profile: 'https://github.com/shadcn.png',
+    }
+
+    data[index] = modifiedPayload
+
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8')
+    revalidatePath('/dashboard/students')
+
+    return { success: 'Student updated successfully' }
+  } catch (error) {
+    return { error: 'Internal Server Error' }
+  }
+}
 
 export async function deleteStudent(id: string) {
   try {
-    const data: StudentType[] = await getStudent()
+    let data: StudentType[] = await getStudent()
     const newData = data.filter((student) => student.id !== id)
 
-    const tempFilePath = path.join('/tmp', 'store-data.json')
-
     // Write the updated data to the /tmp directory
-    await fs.writeFile(tempFilePath, JSON.stringify(newData, null, 2), 'utf-8')
+    await fs.writeFile(filePath, JSON.stringify(newData, null, 2), 'utf-8')
 
     // Revalidate the path to refresh the data on the client side
     revalidatePath('/dashboard/students')
