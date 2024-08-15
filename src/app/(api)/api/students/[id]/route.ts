@@ -2,15 +2,10 @@ import { StudentType } from '@/lib/data/schema'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-// const filePath =
-//   process.env.NODE_ENV === 'production'
-//     ? path.join(process.cwd(), 'tmp', 'store-data.json')
-//     : path.join(process.cwd(), '/tmp', 'store-data.json')
-
 const filePath =
   process.env.NODE_ENV !== 'production'
     ? path.join(process.cwd(), '/tmp', 'store-data.json')
-    : path.join(process.cwd(), 'tmp', 'store-data.json')
+    : path.join('/tmp', 'store-data.json')
 
 export async function DELETE(
   req: Request,
