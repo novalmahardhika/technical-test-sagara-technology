@@ -1,5 +1,6 @@
 import { StudentType } from '@/lib/data/schema'
 import { promises as fs } from 'fs'
+import { revalidatePath } from 'next/cache'
 import path from 'path'
 
 const filePath =
@@ -44,6 +45,8 @@ export async function DELETE(
 
     // Write the updated data to the /tmp directory
     await fs.writeFile(filePath, JSON.stringify(newData, null, 2), 'utf-8')
+
+    revalidatePath('/dashboard/students')
 
     return Response.json({ message: 'Success', data: newData }, { status: 200 })
   } catch (error) {
