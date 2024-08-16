@@ -139,7 +139,7 @@ export default function CreateModal() {
               name='instance'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Instance</FormLabel>
                   <FormControl>
                     <Select onValueChange={(value) => field.onChange(value)}>
                       <SelectTrigger>

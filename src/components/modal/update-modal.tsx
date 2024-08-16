@@ -146,10 +146,7 @@ export default function UpdateModal(student: StudentType) {
                 <FormItem>
                   <FormLabel>Instance</FormLabel>
                   <FormControl>
-                    <Select
-                      defaultValue={student.instance}
-                      onValueChange={(value) => field.onChange(value)}
-                    >
+                    <Select onValueChange={(value) => field.onChange(value)}>
                       <SelectTrigger>
                         <SelectValue placeholder='Select a Instance' />
                       </SelectTrigger>
