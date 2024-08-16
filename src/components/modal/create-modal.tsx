@@ -81,7 +81,7 @@ export default function CreateModal() {
           <span className='md:flex hidden text-sm'>Add User</span>
         </div>
       </DialogTrigger>
-      <DialogContent className='max-w-[612px]'>
+      <DialogContent className='max-w-[612px] '>
         <DialogHeader>
           <DialogTitle className='font-semibold'>Add New Student</DialogTitle>
           <Separator />
@@ -90,7 +90,7 @@ export default function CreateModal() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='grid grid-cols-2 gap-4 '
+            className='grid md:grid-cols-2 md:gap-4 '
           >
             <FormField
               control={form.control}
