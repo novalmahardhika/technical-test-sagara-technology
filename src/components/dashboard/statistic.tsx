@@ -55,7 +55,7 @@ export default function Statistic({ student }: { student: StudentType[] }) {
           />
         </div>
 
-        <h1 className='font-bold text-3xl '>{average}</h1>
+        <h1 className='font-bold text-3xl '>{average.toFixed(2)}</h1>
 
         <div className='flex items-end space-x-1 text-emerald-500'>
           <TrendingUp />
